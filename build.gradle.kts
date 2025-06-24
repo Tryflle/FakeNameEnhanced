@@ -7,6 +7,7 @@ plugins {
     id("dev.architectury.architectury-pack200") version "0.1.3"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     kotlin("jvm") version "2.0.0"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.1.20"
 }
 
 //Constants:
@@ -84,6 +85,7 @@ dependencies {
     minecraft("com.mojang:minecraft:1.8.9")
     mappings("de.oceanlabs.mcp:mcp_stable:22-1.8.9")
     forge("net.minecraftforge:forge:1.8.9-11.15.1.2318-1.8.9")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
 
     shadowImpl(kotlin("stdlib-jdk8"))
 
