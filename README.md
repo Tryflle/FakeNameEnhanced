@@ -3,3 +3,4 @@
 # Usage
 `/fakename <name>` - set name <br >
 `/fakename` - reset name
+`/fakenamecolor` - shows all enumchatformatting options you can use
