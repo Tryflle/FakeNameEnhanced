@@ -3,17 +3,17 @@ package com.github.tryflle.fakenameenhanced
 import com.github.tryflle.fakenameenhanced.command.FakeNameColorCommand
 import com.github.tryflle.fakenameenhanced.command.FakeNameCommand
 import com.github.tryflle.fakenameenhanced.util.Config
-import net.minecraftforge.fml.common.Mod
-import net.minecraftforge.fml.common.event.FMLInitializationEvent
-import net.minecraftforge.client.ClientCommandHandler
+import net.fabricmc.api.ClientModInitializer
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback
 
-@Mod(modid = "fakenameenhanced", useMetadata = true)
-class FakeNameEnhanced {
+class FakeNameEnhanced : ClientModInitializer {
 
-    @Mod.EventHandler
-    fun init(event: FMLInitializationEvent) {
+    override fun onInitializeClient() {
         Config.load()
-        ClientCommandHandler.instance.registerCommand(FakeNameCommand())
-        ClientCommandHandler.instance.registerCommand(FakeNameColorCommand())
+
+        ClientCommandRegistrationCallback.EVENT.register { dispatcher, _ ->
+            FakeNameCommand.register(dispatcher)
+            FakeNameColorCommand.register(dispatcher)
+        }
     }
 }

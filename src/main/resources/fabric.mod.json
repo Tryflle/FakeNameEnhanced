@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "${id}",
+  "version": "${version}",
+  "name": "${name}",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "authors": [
+    "Tryfle"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/fakenameenhanced",
+    "sources": "https://modrinth.com/mod/fakenameenhanced"
+  },
+  "license": "MIT",
+  "icon": "assets/template/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.github.tryflle.fakenameenhanced.FakeNameEnhanced"
+    ]
+  },
+  "mixins": [
+    "mixins.fakenameenhanced.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.17",
+    "minecraft": "${minecraft}"
+  }
+}

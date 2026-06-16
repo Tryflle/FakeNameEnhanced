@@ -1,48 +1,50 @@
 package com.github.tryflle.fakenameenhanced.command
 
-import net.minecraft.command.CommandBase
-import net.minecraft.command.ICommandSender
-import net.minecraft.util.ChatComponentText
-import net.minecraft.util.EnumChatFormatting
+import com.mojang.brigadier.CommandDispatcher
+//? if >=26.1 {
+import net.fabricmc.fabric.api.client.command.v2.ClientCommands.literal
+//? } else
+//import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal
 
-class FakeNameColorCommand : CommandBase() {
+import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
+import net.minecraft.ChatFormatting
+import net.minecraft.network.chat.Component
 
-    override fun getCommandName(): String? {
-        return "fakenamecolor"
-    }
+object FakeNameColorCommand {
 
-    override fun getCommandUsage(sender: net.minecraft.command.ICommandSender?): String {
-        return "Usage: /fakenamecolor <color_code>"
-    }
+    fun register(dispatcher: CommandDispatcher<FabricClientCommandSource>) {
+        dispatcher.register(
+            literal("fakenamecolor")
+                .executes { ctx ->
+                    val message = Component.literal(
+                        "These are the chat formatting options that are available:"
+                    ).withStyle(ChatFormatting.AQUA).apply {
+                        append(Component.literal("\n&f - White").withStyle(ChatFormatting.WHITE))
+                        append(Component.literal("\n&d - Light Purple").withStyle(ChatFormatting.LIGHT_PURPLE))
+                        append(Component.literal("\n&b - Aqua").withStyle(ChatFormatting.AQUA))
+                        append(Component.literal("\n&a - Green").withStyle(ChatFormatting.GREEN))
+                        append(Component.literal("\n&9 - Blue").withStyle(ChatFormatting.BLUE))
+                        append(Component.literal("\n&e - Yellow").withStyle(ChatFormatting.YELLOW))
+                        append(Component.literal("\n&c - Red").withStyle(ChatFormatting.RED))
+                        append(Component.literal("\n&2 - Dark Green").withStyle(ChatFormatting.DARK_GREEN))
+                        append(Component.literal("\n&3 - Dark Aqua").withStyle(ChatFormatting.DARK_AQUA))
+                        append(Component.literal("\n&4 - Dark Red").withStyle(ChatFormatting.DARK_RED))
+                        append(Component.literal("\n&5 - Dark Purple").withStyle(ChatFormatting.DARK_PURPLE))
+                        append(Component.literal("\n&1 - Dark Blue").withStyle(ChatFormatting.DARK_BLUE))
+                        append(Component.literal("\n&6 - Gold").withStyle(ChatFormatting.GOLD))
+                        append(Component.literal("\n&7 - Gray").withStyle(ChatFormatting.GRAY))
+                        append(Component.literal("\n&8 - Dark Gray").withStyle(ChatFormatting.DARK_GRAY))
+                        append(Component.literal("\n&0 - Black").withStyle(ChatFormatting.BLACK))
+                        append(Component.literal("\n&l - Bold").withStyle(ChatFormatting.BOLD))
+                        append(Component.literal("\n&n - Underline").withStyle(ChatFormatting.UNDERLINE))
+                        append(Component.literal("\n&o - Italic").withStyle(ChatFormatting.ITALIC))
+                        append(Component.literal("\n&m - Strikethrough").withStyle(ChatFormatting.STRIKETHROUGH))
+                        append(Component.literal("\n&r - Reset").withStyle(ChatFormatting.RESET))
+                    }
 
-    override fun getRequiredPermissionLevel(): Int {
-        return 0
-    }
-
-    override fun processCommand(sender: ICommandSender?, args: Array<out String?>?) {
-        sender?.addChatMessage(ChatComponentText(
-            EnumChatFormatting.AQUA.toString() + "These are the chat formatting options that are available:"
-            + "\n" + EnumChatFormatting.WHITE + " &f - White"
-            + "\n" + EnumChatFormatting.LIGHT_PURPLE + " &d - Light Purple"
-            + "\n" + EnumChatFormatting.AQUA + " &b - Aqua"
-            + "\n" + EnumChatFormatting.GREEN + " &a - Green"
-            + "\n" + EnumChatFormatting.BLUE + " &9 - Blue"
-            + "\n" + EnumChatFormatting.YELLOW + " &e - Yellow"
-            + "\n" + EnumChatFormatting.RED + " &c - Red"
-            + "\n" + EnumChatFormatting.DARK_GREEN + " &2 - Dark Green"
-            + "\n" + EnumChatFormatting.DARK_AQUA + " &3 - Dark Aqua"
-            + "\n" + EnumChatFormatting.DARK_RED + " &4 - Dark Red"
-            + "\n" + EnumChatFormatting.DARK_PURPLE + " &5 - Dark Purple"
-            + "\n" + EnumChatFormatting.DARK_BLUE + " &1 - Dark Blue"
-            + "\n" + EnumChatFormatting.GOLD + " &6 - Gold"
-            + "\n" + EnumChatFormatting.GRAY + " &7 - Gray"
-            + "\n" + EnumChatFormatting.DARK_GRAY + " &8 - Dark Gray"
-            + "\n" + EnumChatFormatting.BLACK + " &0 - Black"
-            + "\n" + EnumChatFormatting.BOLD + " &l - Bold"
-            + "\n" + EnumChatFormatting.UNDERLINE + " &n - Underline"
-            + "\n" + EnumChatFormatting.ITALIC + " &o - Italic"
-            + "\n" + EnumChatFormatting.STRIKETHROUGH + " &m - Strikethrough"
-            + "\n" + EnumChatFormatting.RESET + " &r - Reset"
-        ))
+                    ctx.source.sendFeedback(message)
+                    1
+                }
+        )
     }
 }

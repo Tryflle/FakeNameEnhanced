@@ -1,26 +1,25 @@
 pluginManagement {
     repositories {
+        mavenLocal()
         mavenCentral()
         gradlePluginPortal()
-        maven("https://oss.sonatype.org/content/repositories/snapshots")
-        maven("https://maven.architectury.dev/")
-        maven("https://maven.fabricmc.net")
-        maven("https://maven.minecraftforge.net/")
-        maven("https://repo.spongepowered.org/maven/")
-        maven("https://repo.essential.gg/repository/maven-releases/")
-    }
-    resolutionStrategy {
-        eachPlugin {
-            when (requested.id.id) {
-                "gg.essential.loom" -> useModule("gg.essential:architectury-loom:${requested.version}")
-            }
-        }
+        maven("https://maven.fabricmc.net/")
+        maven("https://maven.kikugie.dev/releases") { name = "KikuGie Releases" }
+        maven("https://maven.kikugie.dev/snapshots") { name = "KikuGie Snapshots" }
     }
 }
 
 plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version("0.6.0")
+    id("dev.kikugie.stonecutter") version "0.9.6"
+    id("dev.kikugie.loom-back-compat") version "0.3"
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
+stonecutter {
+    create(rootProject) {
+        versions("1.21.1", "1.21.4", "1.21.8", "1.21.10", "1.21.11", "26.1")
+        vcsVersion = "26.1"
+    }
+}
 
 rootProject.name = "FakeNameEnhanced"
